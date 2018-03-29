@@ -156,11 +156,6 @@ func (l *Light) Verify(block Block) bool {
 		return false
 	}
 
-	// avoid mixdigest malleability as it's not included in a block's "hashNononce"
-	if block.MixDigest() != mixDigest {
-		return false
-	}
-
 	// The actual check.
 	target := new(big.Int).Div(maxUint256, difficulty)
 	return result.Big().Cmp(target) <= 0
